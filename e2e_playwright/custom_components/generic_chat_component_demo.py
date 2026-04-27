@@ -16,9 +16,7 @@ from __future__ import annotations
 
 import streamlit as st
 
-from e2e_playwright.custom_components.generic_chat_component import (
-    generic_chat_component,
-)
+from streamlit.components.generic_chat import generic_chat
 
 
 def build_response(prompt: str) -> str:
@@ -49,7 +47,7 @@ if st.button("Reset chat"):
     st.session_state.last_generic_chat_event_id = None
     st.rerun()
 
-event = generic_chat_component(
+event = generic_chat(
     messages=st.session_state.generic_chat_messages,
     placeholder="Message the assistant",
     message_status="demo",

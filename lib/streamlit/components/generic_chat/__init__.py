@@ -20,14 +20,14 @@ from typing import Any
 import streamlit.components.v1 as components
 
 
-_COMPONENT_PATH = Path(__file__).parent / "generic_chat_component"
-_generic_chat_component = components.declare_component(
-    "generic_chat_component",
+_COMPONENT_PATH = Path(__file__).parent / "frontend"
+_generic_chat = components.declare_component(
+    "generic_chat",
     path=_COMPONENT_PATH,
 )
 
 
-def generic_chat_component(
+def generic_chat(
     *,
     messages: list[dict[str, Any]],
     placeholder: str = "Message the assistant",
@@ -36,14 +36,14 @@ def generic_chat_component(
     message_status: str = "ready",
     disabled: bool = False,
     height: int = 720,
-    key: str = "generic_chat_component",
+    key: str = "generic_chat",
 ) -> dict[str, Any] | None:
     """Render a minimal, bidirectional custom chat component.
 
     Returns a JSON-serializable event like {"id": "...", "text": "..."} when
     the user submits a prompt from inside the component.
     """
-    return _generic_chat_component(
+    return _generic_chat(
         messages=messages,
         placeholder=placeholder,
         user_label=user_label,
@@ -54,3 +54,8 @@ def generic_chat_component(
         default=None,
         key=key,
     )
+
+
+generic_chat_component = generic_chat
+
+__all__ = ["generic_chat", "generic_chat_component"]
