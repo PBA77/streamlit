@@ -74,20 +74,20 @@ function getSizeStyle(size: BaseButtonSize, theme: EmotionTheme): CSSObject {
   switch (size) {
     case BaseButtonSize.XSMALL:
       return {
-        padding: `${theme.spacing.twoXS} ${theme.spacing.sm}`,
+        padding: `${theme.spacing.threeXS} ${theme.spacing.sm}`,
         fontSize: theme.fontSizes.sm,
       }
     case BaseButtonSize.SMALL:
       return {
-        padding: `${theme.spacing.twoXS} ${theme.spacing.md}`,
+        padding: `${theme.spacing.threeXS} ${theme.spacing.md}`,
       }
     case BaseButtonSize.LARGE:
       return {
-        padding: `${theme.spacing.md} ${theme.spacing.md}`,
+        padding: `${theme.spacing.sm} ${theme.spacing.md}`,
       }
     default:
       return {
-        padding: `${theme.spacing.xs} ${theme.spacing.md}`,
+        padding: `${theme.spacing.twoXS} ${theme.spacing.md}`,
       }
   }
 }
@@ -99,7 +99,7 @@ const StyledBaseButton = styled.button<RequiredBaseButtonProps>(
       alignItems: "center",
       justifyContent: "center",
       fontWeight: theme.fontWeights.normal,
-      padding: `${theme.spacing.xs} ${theme.spacing.md}`,
+      padding: `${theme.spacing.twoXS} ${theme.spacing.md}`,
       borderRadius: theme.radii.button,
       minHeight: theme.sizes.minElementHeight,
       margin: theme.spacing.none,
@@ -289,7 +289,7 @@ export const StyledPillsButton = styled(
 )<RequiredBaseButtonProps>(({ theme, containerWidth }) => {
   return {
     borderRadius: theme.radii.full,
-    padding: `${theme.spacing.twoXS} ${theme.spacing.md}`,
+    padding: `${theme.spacing.threeXS} ${theme.spacing.md}`,
     // When containerWidth is true, the buttons will stretch to fill the container.
     flex: containerWidth ? "1 1 fit-content" : "",
   }
@@ -333,7 +333,7 @@ export const StyledSegmentedControlButton = styled(
   StyledButtonGroupBaseButton
 )<RequiredBaseButtonProps>(({ theme, containerWidth }) => {
   return {
-    padding: `${theme.spacing.twoXS} ${theme.spacing.lg}`,
+    padding: `${theme.spacing.threeXS} ${theme.spacing.md}`,
     borderRadius: "0",
     // When containerWidth is true, the buttons will stretch to fill the container.
     flex: containerWidth ? "1 1 fit-content" : "",
@@ -452,8 +452,8 @@ export const StyledBorderlessIconButton = styled(
   const iconPadding: Record<BaseButtonSize, string> = {
     [BaseButtonSize.XSMALL]: theme.spacing.threeXS,
     [BaseButtonSize.SMALL]: theme.spacing.twoXS,
-    [BaseButtonSize.MEDIUM]: theme.spacing.md,
-    [BaseButtonSize.LARGE]: theme.spacing.lg,
+    [BaseButtonSize.MEDIUM]: theme.spacing.sm,
+    [BaseButtonSize.LARGE]: theme.spacing.md,
   }
 
   return {

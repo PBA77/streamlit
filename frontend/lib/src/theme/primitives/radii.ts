@@ -19,13 +19,13 @@
 export const radii = {
   sm: "0.25rem",
   // Used for dropdown item highlights:
-  md2: "0.375rem",
+  md2: "0.25rem",
   // This is the default radius used in most elements:
-  default: "0.5rem",
-  xl: "0.75rem",
-  xxl: "1rem",
+  default: "0.375rem",
+  xl: "0.5rem",
+  xxl: "0.75rem",
   // Radius specific to buttons (enables buttonRadius config):
-  button: "0.5rem",
+  button: "0.375rem",
   // Chat input enforces a more rounded look:
   chatInput: "1.25rem",
   // Ensures that the element is fully rounded:

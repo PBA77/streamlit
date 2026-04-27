@@ -31,9 +31,9 @@ export const StyledWidgetLabel = styled.label<StyledWidgetProps>(
       labelVisibility === LabelVisibilityOptions.Collapsed ? "none" : "flex",
     visibility:
       labelVisibility === LabelVisibilityOptions.Hidden ? "hidden" : "visible",
-    marginBottom: theme.spacing.twoXS,
+    marginBottom: theme.spacing.threeXS,
     height: "auto",
-    minHeight: theme.fontSizes.xl,
+    minHeight: theme.fontSizes.lg,
     verticalAlign: "middle",
     flexDirection: "row",
     alignItems: "center",

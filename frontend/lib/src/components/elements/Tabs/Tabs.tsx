@@ -258,7 +258,7 @@ function Tabs(props: Readonly<TabProps>): ReactElement {
   }, [node.children.length, updateScrollState])
 
   const TAB_HEIGHT = theme.sizes.tabHeight
-  const TAB_BORDER_HEIGHT = theme.spacing.threeXS
+  const TAB_BORDER_HEIGHT = theme.spacing.px
 
   return (
     <StyledTabContainer
@@ -309,7 +309,7 @@ function Tabs(props: Readonly<TabProps>): ReactElement {
           TabList: {
             props: { ref: tabListRef },
             style: () => ({
-              gap: theme.spacing.lg,
+              gap: theme.spacing.md,
               marginBottom: `-${TAB_BORDER_HEIGHT}`,
               paddingBottom: TAB_BORDER_HEIGHT,
               overflowY: "hidden",
@@ -365,7 +365,7 @@ function Tabs(props: Readonly<TabProps>): ReactElement {
                     paddingLeft: theme.spacing.none,
                     paddingRight: theme.spacing.none,
                     paddingBottom: theme.spacing.none,
-                    paddingTop: theme.spacing.lg,
+                    paddingTop: theme.spacing.md,
                   }),
                 },
                 Tab: {

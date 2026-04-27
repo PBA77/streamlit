@@ -70,10 +70,10 @@ describe("Button element", () => {
 
       const { spacing } = lightTheme.emotion
       const expectedPadding = {
-        [BaseButtonSize.XSMALL]: `${spacing.twoXS} ${spacing.sm}`,
-        [BaseButtonSize.SMALL]: `${spacing.twoXS} ${spacing.md}`,
-        [BaseButtonSize.LARGE]: `${spacing.md} ${spacing.md}`,
-        [BaseButtonSize.MEDIUM]: `${spacing.xs} ${spacing.md}`,
+        [BaseButtonSize.XSMALL]: `${spacing.threeXS} ${spacing.sm}`,
+        [BaseButtonSize.SMALL]: `${spacing.threeXS} ${spacing.md}`,
+        [BaseButtonSize.LARGE]: `${spacing.sm} ${spacing.md}`,
+        [BaseButtonSize.MEDIUM]: `${spacing.twoXS} ${spacing.md}`,
       }
 
       const buttonWidget = screen.getByRole("button")

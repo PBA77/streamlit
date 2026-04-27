@@ -17,15 +17,15 @@
 import { spacing } from "./spacing"
 
 // Base values used in computed sizes
-const minElementHeight = "2.5rem"
+const minElementHeight = "2.25rem"
 const borderWidth = "1px"
 
 export const sizes = {
   full: "100%",
-  headerHeight: "3.75rem",
+  headerHeight: "3.25rem",
   // Old header height to avoid addtl cascading visual/snapshot changes
   fullScreenHeaderHeight: "2.875rem",
-  sidebarTopSpace: "6rem",
+  sidebarTopSpace: "5rem",
   toastWidth: "21rem",
   // Use px here since we want to keep the width the same
   // regardless of the root font size.
@@ -35,7 +35,7 @@ export const sizes = {
   checkbox: "1rem",
   borderWidth,
   // Used for checkboxes/toggle
-  smallElementHeight: "1.5rem",
+  smallElementHeight: "1.375rem",
   // min height used for most input widgets
   minElementHeight,
   // Height for hover/focus highlights inside input widgets (e.g., dropdown items)
@@ -43,7 +43,7 @@ export const sizes = {
   elementHighlightHeight: `calc(${minElementHeight} - 2 * ${spacing.xs})`,
   tagMarginInsideBorder: `calc(${spacing.xs} - ${borderWidth})`,
   // min height for larger input widgets like text area and audio input
-  largestElementHeight: "4.25rem",
+  largestElementHeight: "3.75rem",
   smallLogoHeight: "1.25rem",
   defaultLogoHeight: "1.5rem",
   largeLogoHeight: "2rem",
@@ -56,7 +56,7 @@ export const sizes = {
   tableColumnMaxWidth: "25rem",
   spinnerSize: "1.375rem",
   spinnerThickness: "0.125rem",
-  tabHeight: "2.5rem",
+  tabHeight: "2.125rem",
   // Min width used for popover and dialog:
   minPopupWidth: "20rem",
   maxTooltipHeight: "18.75rem",
@@ -65,8 +65,8 @@ export const sizes = {
   clearIconSize: "1.5em",
   numberInputControlsWidth: "2rem",
   emptyDropdownHeight: "5.625rem",
-  dropdownItemHeight: "2.5rem",
-  maxDropdownHeight: "18.75rem",
+  dropdownItemHeight: "2.125rem",
+  maxDropdownHeight: "17rem",
   appDefaultBottomPadding: "3.5rem",
   defaultMapHeight: "31.25rem",
   defaultChartHeight: "21.875rem",
@@ -75,7 +75,7 @@ export const sizes = {
   minMenuWidth: "8rem",
   minChatInputFileListHeight: "3rem",
   uploadedFileIconSize: "2rem",
-  headerItemHeight: "1.75rem",
+  headerItemHeight: "1.625rem",
   headerRightContentMaxWidth: "12.5rem",
   chatInputTextareaMinHeight: "1.5rem",
   chatInputPrimaryButtonSize: "2rem",
