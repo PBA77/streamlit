@@ -1,0 +1,339 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f7f8fa;
+      --panel: #ffffff;
+      --panel-2: #f1f4f8;
+      --line: #d8dee8;
+      --text: #1f2937;
+      --muted: #667085;
+      --soft: #98a2b3;
+      --accent: #2454a6;
+      --accent-2: #eef4ff;
+      --success: #027a48;
+      --header-start: #ffffff;
+      --header-end: #f9fafb;
+      --avatar-bg: #334155;
+      --avatar-text: #ffffff;
+      --user-panel: #f8fbff;
+      --user-line: #c7d7fe;
+      --topline: #fbfcfe;
+      --source-border: #c7d7fe;
+      --source-text: #1d4ed8;
+      --row-line: #eef2f6;
+      --composer-bg: #ffffff;
+      --composer-preview-bg: #fbfcfe;
+      --send-border: #1d4ed8;
+      --send-text: #ffffff;
+      font-family: "Source Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #0e1117;
+      --panel: #171923;
+      --panel-2: #202738;
+      --line: #303847;
+      --text: #f2f4f7;
+      --muted: #b7c0ce;
+      --soft: #8a94a6;
+      --accent: #5b9cff;
+      --accent-2: #14243e;
+      --success: #32d583;
+      --header-start: #171923;
+      --header-end: #141821;
+      --avatar-bg: #4b5565;
+      --avatar-text: #f8fafc;
+      --user-panel: #13233a;
+      --user-line: #2f5f9e;
+      --topline: #1b2230;
+      --source-border: #37679f;
+      --source-text: #9cc7ff;
+      --row-line: #273142;
+      --composer-bg: #151923;
+      --composer-preview-bg: #111827;
+      --send-border: #5b9cff;
+      --send-text: #06101f;
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; background: transparent; color: var(--text); }
+    .chat-shell {
+      height: 712px;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: 0 1px 2px rgba(16, 24, 40, 0.08);
+      overflow: hidden;
+    }
+    .chat-main { min-height: 0; background: var(--bg); }
+    .conversation { height: 100%; min-height: 0; overflow: auto; padding: 14px; }
+    .message { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 10px; margin-bottom: 12px; }
+    .avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--avatar-text);
+      background: var(--avatar-bg);
+    }
+    .message-user .avatar { background: var(--accent); }
+    .message-body { border: 1px solid var(--line); border-radius: 8px; background: var(--panel); overflow: hidden; }
+    .message-user .message-body { border-color: var(--user-line); background: var(--user-panel); }
+    .message-topline {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--line);
+      background: var(--topline);
+    }
+    .role-label { font-size: 12px; font-weight: 700; }
+    .message-status { color: var(--soft); font-size: 11px; white-space: nowrap; }
+    .message-content { padding: 10px; font-size: 13px; line-height: 1.45; }
+    .message-content p { margin: 0 0 7px 0; }
+    .message-content p:last-child { margin-bottom: 0; }
+    .chat-list-item { padding: 4px 0; }
+    .chat-spacer { height: 4px; }
+    .message-meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 0 10px 10px; }
+    .meta-box {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--panel-2);
+      padding: 8px;
+      min-width: 0;
+    }
+    .meta-title {
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .source-row { display: flex; gap: 5px; flex-wrap: wrap; }
+    .source-chip {
+      display: inline-flex;
+      max-width: 100%;
+      padding: 3px 6px;
+      border: 1px solid var(--source-border);
+      border-radius: 999px;
+      background: var(--accent-2);
+      color: var(--source-text);
+      font-size: 11px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .meta-box ol { margin: 0; padding-left: 17px; color: var(--muted); font-size: 11px; line-height: 1.45; }
+    .muted { color: var(--muted); font-size: 11px; }
+    .composer {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: end;
+      padding: 10px 14px;
+      border-top: 1px solid var(--line);
+      background: var(--composer-bg);
+    }
+    textarea {
+      width: 100%;
+      height: 64px;
+      resize: none;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 9px 10px;
+      color: var(--text);
+      background: var(--composer-preview-bg);
+      font: inherit;
+      font-size: 13px;
+      line-height: 1.35;
+      outline: none;
+    }
+    textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 24%, transparent); }
+    button {
+      height: 36px;
+      padding: 0 14px;
+      border-radius: 7px;
+      border: 1px solid var(--send-border);
+      color: var(--send-text);
+      background: var(--accent);
+      font-weight: 700;
+      font-size: 12px;
+      font-family: inherit;
+      cursor: pointer;
+    }
+    button:disabled { opacity: 0.45; cursor: not-allowed; }
+    @media (max-width: 820px) {
+      .composer { grid-template-columns: 1fr; }
+      button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <section class="chat-shell">
+    <main class="chat-main">
+      <div class="conversation" id="conversation"></div>
+    </main>
+    <footer class="composer">
+      <textarea id="prompt" placeholder="Message the assistant"></textarea>
+      <button id="send" type="button">Send</button>
+    </footer>
+  </section>
+
+  <script>
+    const API_VERSION = 1;
+    const root = document.documentElement;
+    const promptInput = document.getElementById("prompt");
+    const sendButton = document.getElementById("send");
+    let disabled = false;
+
+    function sendBack(type, data) {
+      window.parent.postMessage({ isStreamlitMessage: true, type, ...data }, "*");
+    }
+
+    function setHeight() {
+      sendBack("streamlit:setFrameHeight", { height: document.body.scrollHeight });
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function markdownFragment(text) {
+      return escapeHtml(text).split(/\r?\n/).map((line) => {
+        const stripped = line.trim();
+        if (!stripped) return "<div class='chat-spacer'></div>";
+        if (/^\d+\.\s/.test(stripped)) return `<div class="chat-list-item">${stripped}</div>`;
+        return `<p>${stripped}</p>`;
+      }).join("");
+    }
+
+    function renderMessage(message) {
+      const role = message.role || "assistant";
+      const roleLabel = role === "user" ? currentLabels.user : currentLabels.assistant;
+      const sources = Array.isArray(message.sources) ? message.sources : [];
+      const toolTrace = Array.isArray(message.tool_trace) ? message.tool_trace : [];
+      const messageMeta = Array.isArray(message.metadata) ? message.metadata : [];
+      const hasMeta = sources.length || toolTrace.length || messageMeta.length;
+      const customMeta = messageMeta.map((item) => `
+        <div class="meta-box">
+          <div class="meta-title">${escapeHtml(item.title || item.label || "Detail")}</div>
+          <div class="muted">${escapeHtml(item.value || item.text || "")}</div>
+        </div>
+      `).join("");
+      const meta = role === "assistant" && hasMeta ? `
+        <div class="message-meta-grid">
+          ${sources.length ? `
+            <div class="meta-box">
+              <div class="meta-title">${escapeHtml(currentLabels.references)}</div>
+              <div class="source-row">
+                ${sources.map((source) => `<span class="source-chip">${escapeHtml(source)}</span>`).join("")}
+              </div>
+            </div>
+          ` : ""}
+          ${toolTrace.length ? `
+            <div class="meta-box">
+              <div class="meta-title">${escapeHtml(currentLabels.activity)}</div>
+              <ol>${toolTrace.map((step) => `<li>${escapeHtml(step)}</li>`).join("")}</ol>
+            </div>
+          ` : ""}
+          ${customMeta}
+        </div>
+      ` : "";
+
+      return `
+        <article class="message message-${escapeHtml(role)}">
+          <div class="avatar">${escapeHtml(roleLabel[0])}</div>
+          <div class="message-body">
+            <div class="message-topline">
+              <span class="role-label">${roleLabel}</span>
+              <span class="message-status">${escapeHtml(currentLabels.status)}</span>
+            </div>
+            <div class="message-content">${markdownFragment(message.content || "")}</div>
+            ${meta}
+          </div>
+        </article>
+      `;
+    }
+
+    function setTheme(theme) {
+      if (!theme) return;
+      root.dataset.theme = theme.base === "dark" ? "dark" : "light";
+    }
+
+    let currentLabels = {
+      user: "You",
+      assistant: "Assistant",
+      status: "ready",
+      references: "References",
+      activity: "Activity",
+    };
+
+    function render(args, theme) {
+      setTheme(theme);
+      disabled = Boolean(args.disabled);
+      sendButton.disabled = disabled;
+      promptInput.disabled = disabled;
+      promptInput.placeholder = args.placeholder || "Message the assistant";
+
+      currentLabels = {
+        user: args.user_label || "You",
+        assistant: args.assistant_label || "Assistant",
+        status: args.message_status || "ready",
+        references: args.references_label || "References",
+        activity: args.activity_label || "Activity",
+      };
+
+      document.getElementById("conversation").innerHTML =
+        (args.messages || []).map(renderMessage).join("");
+
+      requestAnimationFrame(() => {
+        const conversation = document.getElementById("conversation");
+        conversation.scrollTop = conversation.scrollHeight;
+        setHeight();
+      });
+    }
+
+    function submitPrompt() {
+      const text = promptInput.value.trim();
+      if (!text || disabled) return;
+      promptInput.value = "";
+      sendBack("streamlit:setComponentValue", {
+        value: { id: `${Date.now()}-${Math.random().toString(16).slice(2)}`, text },
+        dataType: "json",
+      });
+    }
+
+    sendButton.addEventListener("click", submitPrompt);
+    promptInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        submitPrompt();
+      }
+    });
+
+    window.addEventListener("message", (event) => {
+      if (event.data?.type === "streamlit:render") {
+        render(event.data.args || {}, event.data.theme);
+      }
+    });
+
+    sendBack("streamlit:componentReady", { apiVersion: API_VERSION });
+  </script>
+</body>
+</html>
